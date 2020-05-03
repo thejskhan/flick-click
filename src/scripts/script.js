@@ -88,12 +88,16 @@ function httpGetJson(url) {
     })
     .then(function (responseAsJson) {
       updateCondition(responseAsJson);
-      console.log("I am running!");
+      console.log("Successful connection!");
     })
     .catch((error) => {
+      isConnected = false;
       $(".wifi-status").html("DISCONNECTED");
+      $(".temprature-content").html("");
+      $(".humidity-content").html("");
       console.error("Error:", error);
-    })
+      console.log("Unsuccessful connection!");
+    });
 }
 
 function lightToggle() {
@@ -112,7 +116,7 @@ function motionDetectToggle() {
 function updateCondition(jsonfile) {
   let temp = "" + jsonfile.temprature + "°";
   let humidity = "" + jsonfile.humidity + "%";
-  let isConnected = jsonfile.connectionstatus;
+  isConnected = jsonfile.connectionstatus;
   if(jsonfile.ledstate != lightStateOn){
     changeSwitchStyle(".inner-shape-big");
   }
@@ -129,6 +133,7 @@ $(document).ready(function () {
 
 let ssid;
 let password;
+let isConnected = false;
 
 function openPanel() {
   $(".flex-container-1").css({
@@ -160,7 +165,7 @@ function closePanel() {
 function submitWifi() {
   ssid = $("#ssid").val();
   password = $("#password").val();
-  $(".wifi-status").html("CONNECTING...");
+  $(".wifi-status").html("CONNECTING...")
   let createdUrl = `http://192.168.11.4/?ssid=${ssid}&pass=${password}`;
   fetch(createdUrl);
 

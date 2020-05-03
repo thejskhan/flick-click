@@ -42,6 +42,10 @@
   padding: 15px 35px;
   color: #ffffff;
   cursor: pointer;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -68,6 +72,10 @@
   background-color: #98fb98 !important;
   padding: 25px 30px !important;
   color: #000000 !important;
+  -webkit-transition: 0.5s !important;
+  -moz-transition: 0.5s !important;
+  -ms-transition: 0.5s !important;
+  -o-transition: 0.5s !important;
   transition: 0.5s !important;
 }
 /*  */
@@ -107,8 +115,8 @@
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: none;
   margin: 0;
+  -moz-appearance: none;
 }
 
 input::placeholder {
@@ -117,6 +125,11 @@ input::placeholder {
 
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input:focus {
+  outline: none;
 }
 
 .timer-animation-wrap {
@@ -132,6 +145,10 @@ input[type="number"] {
   align-items: center;
   flex: 1;
   cursor: pointer;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
   transition: 0.2s;
 }
 

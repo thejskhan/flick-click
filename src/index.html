@@ -31,7 +31,7 @@
           <div class="top-nav-child motion">
             <div class="motion-detect-bar">
               <div class="motion-detect-label">
-                <a class="md-label-content">MOTION DETECTED!</a>
+                <a class="md-label-content">WAITING MOTION...</a>
               </div>
             </div>
           </div>
@@ -61,164 +61,11 @@
             <div class="timer-form-wrap">
               <form class="timer-form">
                 <label for="hour">Hour:</label>
-                <input id="hour" name="hour" value="" type="number" autocomplete="off" min="0" max="23" list="hours"
-                  placeholder="0-23hr" onkeypress="return inputRestrict(event)">
+                <input id="hour" name="hour" value="" type="number" autocomplete="off" min="0" max="23" placeholder="0-23hr" onkeypress="return inputRestrict(event)">
                 <label for="minute">Minute:</label>
-                <input id="minute" name="minute" value="" type="number" autocomplete="off" min="0" max="59"
-                  list="minutes" placeholder="0-59m" onkeypress="return inputRestrict(event)">
+                <input id="minute" name="minute" value="" type="number" autocomplete="off" min="0" max="59" placeholder="0-59m" onkeypress="return inputRestrict(event)">
                 <label for="second">Second:</label>
-                <input id="second" name="second" value="" type="number" autocomplete="off" min="0" max="59"
-                  list="seconds" placeholder="0-59s" onkeypress="return inputRestrict(event)">
-                <datalist id="hours">
-                  <option value="0"></option>
-                  <option value="1"></option>
-                  <option value="2"></option>
-                  <option value="3"></option>
-                  <option value="4"></option>
-                  <option value="5"></option>
-                  <option value="6"></option>
-                  <option value="7"></option>
-                  <option value="8"></option>
-                  <option value="9"></option>
-                  <option value="10"></option>
-                  <option value="11"></option>
-                  <option value="12"></option>
-                  <option value="13"></option>
-                  <option value="14"></option>
-                  <option value="15"></option>
-                  <option value="16"></option>
-                  <option value="17"></option>
-                  <option value="18"></option>
-                  <option value="19"></option>
-                  <option value="20"></option>
-                  <option value="21"></option>
-                  <option value="22"></option>
-                  <option value="23"></option>
-                </datalist>
-                <datalist id="minutes">
-                  <option value="0"></option>
-                  <option value="1"></option>
-                  <option value="2"></option>
-                  <option value="3"></option>
-                  <option value="4"></option>
-                  <option value="5"></option>
-                  <option value="6"></option>
-                  <option value="7"></option>
-                  <option value="8"></option>
-                  <option value="9"></option>
-                  <option value="10"></option>
-                  <option value="11"></option>
-                  <option value="12"></option>
-                  <option value="13"></option>
-                  <option value="14"></option>
-                  <option value="15"></option>
-                  <option value="16"></option>
-                  <option value="17"></option>
-                  <option value="18"></option>
-                  <option value="19"></option>
-                  <option value="20"></option>
-                  <option value="21"></option>
-                  <option value="22"></option>
-                  <option value="23"></option>
-                  <option value="24"></option>
-                  <option value="25"></option>
-                  <option value="26"></option>
-                  <option value="27"></option>
-                  <option value="28"></option>
-                  <option value="29"></option>
-                  <option value="30"></option>
-                  <option value="31"></option>
-                  <option value="32"></option>
-                  <option value="33"></option>
-                  <option value="34"></option>
-                  <option value="35"></option>
-                  <option value="36"></option>
-                  <option value="37"></option>
-                  <option value="38"></option>
-                  <option value="39"></option>
-                  <option value="40"></option>
-                  <option value="41"></option>
-                  <option value="42"></option>
-                  <option value="43"></option>
-                  <option value="44"></option>
-                  <option value="45"></option>
-                  <option value="46"></option>
-                  <option value="47"></option>
-                  <option value="48"></option>
-                  <option value="49"></option>
-                  <option value="50"></option>
-                  <option value="51"></option>
-                  <option value="52"></option>
-                  <option value="53"></option>
-                  <option value="54"></option>
-                  <option value="55"></option>
-                  <option value="56"></option>
-                  <option value="57"></option>
-                  <option value="58"></option>
-                  <option value="59"></option>
-                </datalist>
-                <datalist id="seconds">
-                  <option value="0"></option>
-                  <option value="1"></option>
-                  <option value="2"></option>
-                  <option value="3"></option>
-                  <option value="4"></option>
-                  <option value="5"></option>
-                  <option value="6"></option>
-                  <option value="7"></option>
-                  <option value="8"></option>
-                  <option value="9"></option>
-                  <option value="10"></option>
-                  <option value="11"></option>
-                  <option value="12"></option>
-                  <option value="13"></option>
-                  <option value="14"></option>
-                  <option value="15"></option>
-                  <option value="16"></option>
-                  <option value="17"></option>
-                  <option value="18"></option>
-                  <option value="19"></option>
-                  <option value="20"></option>
-                  <option value="21"></option>
-                  <option value="22"></option>
-                  <option value="23"></option>
-                  <option value="24"></option>
-                  <option value="25"></option>
-                  <option value="26"></option>
-                  <option value="27"></option>
-                  <option value="28"></option>
-                  <option value="29"></option>
-                  <option value="30"></option>
-                  <option value="31"></option>
-                  <option value="32"></option>
-                  <option value="33"></option>
-                  <option value="34"></option>
-                  <option value="35"></option>
-                  <option value="36"></option>
-                  <option value="37"></option>
-                  <option value="38"></option>
-                  <option value="39"></option>
-                  <option value="40"></option>
-                  <option value="41"></option>
-                  <option value="42"></option>
-                  <option value="43"></option>
-                  <option value="44"></option>
-                  <option value="45"></option>
-                  <option value="46"></option>
-                  <option value="47"></option>
-                  <option value="48"></option>
-                  <option value="49"></option>
-                  <option value="50"></option>
-                  <option value="51"></option>
-                  <option value="52"></option>
-                  <option value="53"></option>
-                  <option value="54"></option>
-                  <option value="55"></option>
-                  <option value="56"></option>
-                  <option value="57"></option>
-                  <option value="58"></option>
-                  <option value="59"></option>
-                </datalist>
+                <input id="second" name="second" value="" type="number" autocomplete="off" min="0" max="59" placeholder="0-59s" onkeypress="return inputRestrict(event)">
               </form>
             </div>
             <div class="timer-animation-wrap">
@@ -278,7 +125,7 @@
               <input type="submit" value="SEND" id="send-button">
             </form>
           </div>
-          <span class="wifi-status">disconnected...</span>
+          <span class="wifi-status">DISCONNECTED</span>
         </div>
       </div>
     </div>
