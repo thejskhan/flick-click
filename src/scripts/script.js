@@ -113,6 +113,9 @@ function updateCondition(jsonfile) {
   let temp = "" + jsonfile.temprature + "°";
   let humidity = "" + jsonfile.humidity + "%";
   let isConnected = jsonfile.connectionstatus;
+  if(jsonfile.ledstate != lightStateOn){
+    changeSwitchStyle(".inner-shape-big");
+  }
   if(isConnected){
     $(".wifi-status").html("CONNECTED");
   }
@@ -167,4 +170,4 @@ function submitWifi() {
 
 setInterval(function () {
   httpGetJson(url);
-}, 4000);
+}, 2500);
