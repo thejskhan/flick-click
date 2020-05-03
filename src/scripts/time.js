@@ -4,7 +4,9 @@ let hourInput = 0;
 let minInput = 0;
 let secInput = 0;
 let netSec = 0;
+let netSecFull = 0;
 let offset = 480;
+let offsetFull = 512;
 let toOn = true;
 let time = {
   hr: 0,
@@ -98,6 +100,12 @@ function changeOffSet(offset) {
   });
 }
 
+function changeOffSetFull(offsetFull) {
+  $(".middle-circle-2").css({
+    "stroke-dashoffset": `${offsetFull}`
+  })
+}
+
 function timeLog(seconds) {
   if (seconds > 60) {
     if (seconds / 60 > 60) {
@@ -140,9 +148,11 @@ function timeLog(seconds) {
 function timer() {
   if (netSec > 0) {
     offset = offset - 480 / 60;
+    offsetFull = offsetFull - 512/netSecFull;
     netSec = netSec - 1;
     timeLog(netSec);
     changeOffSet(offset);
+    changeOffSetFull(offsetFull);
   }
 }
 
@@ -176,7 +186,9 @@ function toggleTimer() {
     }
     timerOff = false;
     offset = 480;
+    offsetFull = 512;
     netSec = hourInput * 60 * 60 + minInput * 60 + secInput;
+    netSecFull = netSec;
     $("input").prop("disabled", true);
     $(".timer-button-content").text("STOP");
 
@@ -195,6 +207,7 @@ function toggleTimer() {
           // alert("TIME'S UP!");
           timerOff = true;
           netSec = 0;
+          netSecFull = 0;
           $("input").prop("disabled", false);
           $(".timer-button-content").text("START");
           $("#hour-svg").text(`00`);
@@ -215,6 +228,7 @@ function toggleTimer() {
           });
           conditionOn = undefined;
           changeOffSet(480);
+          changeOffSetFull(512);
           timerOff = true;
           clearAllIntervals();
         }, 2000);
@@ -223,6 +237,7 @@ function toggleTimer() {
   } else {
     clearAllIntervals();
     netSec = 0;
+    netSecFull = 0;
     timerOff = true;
     $("input").prop("disabled", false);
     $(".timer-button-content").text("START");
@@ -245,6 +260,7 @@ function toggleTimer() {
     });
     conditionOn = undefined;
     changeOffSet(480);
+    changeOffSetFull(512);
   }
 }
 

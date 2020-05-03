@@ -18,7 +18,7 @@
       <div class="flex-container-1">
         <div class="cloud cloud-1">
           <div class="top-nav-child info">
-            <button class="add-device-button">
+            <button class="add-device-button" onclick="openPanel()">
               <span class="add-device-icon">
                 <img class="add-device-img" src="/media/usb.svg" />
               </span>
@@ -228,8 +228,9 @@
               <div class="animation-wrap">
                 <svg width="285" height="193">
                   <circle class="inner-circle" r="84" cx="142" cy="96"></circle>
+                  <circle class="middle-circle-2" r="81.4" cx="142" cy="96" transform="rotate(-90 142 96)""></circle>
                   <circle class="middle-circle" r="76.4" cx="142" cy="96" transform="rotate(-90 142 96)""></circle>
-                  <circle class=" outer-circle" r="79.4" cx="142" cy="96"></circle>
+                  <circle class="outer-circle" r="79.4" cx="142" cy="96"></circle>
                   <text id="hour-svg" x="75" y="110">00</text>
                   <text x="110" y="105">:</text>
                   <text id="minute-svg" x="125" y="110">00</text>
@@ -263,7 +264,23 @@
           </div>
         </div>
       </div>
-
+      <div class="device-field-wrapper">
+        <div class="device-field">
+          <div class="device-field-nav" onclick="closePanel()">
+            <span class="device-field-nav-content">BACK</span>
+          </div>
+          <div class="device-field-form-wrapper">
+            <form class="wifi-field" onsubmit="submitWifi();return false">
+              <label for="ssid">SSID:</label>
+              <input name="ssid" id="ssid">
+              <label for="password">PASSWORD:</label>
+              <input name="password" id="password">
+              <input type="submit" value="SEND" id="send-button">
+            </form>
+          </div>
+          <span class="wifi-status">disconnected...</span>
+        </div>
+      </div>
     </div>
   </div>
   </div>

@@ -85,13 +85,13 @@
   flex: 1;
 }
 
-label {
+.timer-form > label {
   font-size: 25px;
   font-weight: 900;
   color: #000000;
 }
 
-input {
+.timer-form > input {
   display: block;
   margin: 10px;
   border: 1px solid #ffffff;
@@ -132,6 +132,7 @@ input[type="number"] {
   align-items: center;
   flex: 1;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .timer-button:hover {
@@ -157,13 +158,23 @@ svg {
 
 .inner-circle {
   fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 14px;
+  stroke-dashoffset: 0;
 }
+
 .middle-circle {
-  stroke: #999999;
+  stroke: #98fb98;
   stroke-width: 25px;
   stroke-dasharray: 480;
   stroke-dashoffset: 480;
-  /* transform: rotate(-90deg); */
+}
+
+.middle-circle-2 {
+  stroke: #999999;
+  stroke-width: 20px;
+  stroke-dasharray: 512;
+  stroke-dashoffset: 512;
 }
 
 .outer-circle {

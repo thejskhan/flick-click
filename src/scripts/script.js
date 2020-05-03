@@ -1,9 +1,9 @@
 let lightStateOn = true;
 let motionDetectOn = true;
 
-const ledOnUrl = "http://192.168.1.200/data?data=on";
-const ledOffUrl = "http://192.168.1.200/data?data=off";
-const url = "http://192.168.1.200/data?data=temp";
+const ledOnUrl = "http://esp8266.local/?led=on";
+const ledOffUrl = "http://esp8266.local/?led=off";
+const url = "http://esp8266.local/?feedback";
 
 const ledState = [
   {
@@ -89,20 +89,18 @@ function httpGetJson(url) {
     .then(function (responseAsJson) {
       updateCondition(responseAsJson);
       console.log("I am running!");
-    });
+    })
+    .catch((error) => {
+      $(".wifi-status").html("DISCONNECTED");
+      console.error("Error:", error);
+    })
 }
 
 function lightToggle() {
   changeSwitchStyle(".inner-shape-big");
-  $(".flex-container-1").css({
-    "background-image": "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)",
-  });
   if (lightStateOn) {
     fetch(ledOnUrl);
   } else {
-    $(".flex-container-1").css({
-      "background-image": "linear-gradient(to top, #30cfd0 0%, #330867 100%)",
-    });
     fetch(ledOffUrl);
   }
 }
@@ -114,6 +112,10 @@ function motionDetectToggle() {
 function updateCondition(jsonfile) {
   let temp = "" + jsonfile.temprature + "°";
   let humidity = "" + jsonfile.humidity + "%";
+  let isConnected = jsonfile.connectionstatus;
+  if(isConnected){
+    $(".wifi-status").html("CONNECTED");
+  }
   $(".temprature-content").html(temp);
   $(".humidity-content").html(humidity);
 }
@@ -122,6 +124,47 @@ $(document).ready(function () {
   fetch(ledOnUrl);
 });
 
+let ssid;
+let password;
+
+function openPanel() {
+  $(".flex-container-1").css({
+    "filter": "brightness(60%)",
+  })
+
+  $(".cloud").css({
+    "filter": "blur(15px)",
+  })
+
+  $(".device-field-wrapper").css({
+    "display": "flex",
+  })
+}
+
+function closePanel() {
+  $(".flex-container-1").css({
+    "filter": "",
+  })
+
+  $(".cloud").css({
+    "filter": "",
+  })
+  $(".device-field-wrapper").css({
+    "display": "none",
+  })
+}
+
+function submitWifi() {
+  ssid = $("#ssid").val();
+  password = $("#password").val();
+  $(".wifi-status").html("CONNECTING...");
+  let createdUrl = `http://192.168.11.4/?ssid=${ssid}&pass=${password}`;
+  fetch(createdUrl);
+
+  let customUrl = `http://esp8266.local/?ssid=${ssid}&pass=${password}`;
+  fetch(customUrl);
+}
+
 setInterval(function () {
   httpGetJson(url);
-}, 7000);
+}, 4000);
