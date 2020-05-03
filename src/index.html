@@ -121,7 +121,8 @@
               <label for="ssid">SSID:</label>
               <input name="ssid" id="ssid">
               <label for="password">PASSWORD:</label>
-              <input name="password" id="password">
+              <input name="password" type="password" id="password" autocomplete="off">
+              <input type="checkbox" checked="checked" onclick="togglePass()">
               <input type="submit" value="SEND" id="send-button">
             </form>
           </div>

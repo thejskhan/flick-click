@@ -173,6 +173,15 @@ function submitWifi() {
   fetch(customUrl);
 }
 
+function togglePass(){
+  let input = document.getElementById("password");
+  if (input.type === "password") {
+    input.type = "text";
+  } else {
+    input.type = "password";
+  }
+}
+
 setInterval(function () {
   httpGetJson(url);
 }, 2500);
