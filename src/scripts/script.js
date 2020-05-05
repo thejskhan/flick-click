@@ -105,6 +105,10 @@ function httpGetJson(url) {
     .catch((error) => {
       isConnected = false;
       $(".wifi-status").html("DISCONNECTED");
+      $(".indicator").css({
+        "background-color": "#ff0000",
+        "box-shadow": "",
+      })
       $(".md-label-content").html("DISCONNECTED")
       $("#brightness").attr("placeholder", `1-3`);
       $(".state-content").text(`!`);
