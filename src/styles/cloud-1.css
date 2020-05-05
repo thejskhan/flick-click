@@ -130,8 +130,18 @@
 
 .md-label-content {
   color: #ffffff;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
   font-size: 25px;
+  margin: 20px;
+}
+
+.indicator {
+  margin: 20px;
+  background-color: #fca903;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
 }
 /*  */

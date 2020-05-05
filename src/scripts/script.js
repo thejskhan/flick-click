@@ -128,10 +128,18 @@ function lightToggle() {
 function motionDetectToggle() {
   changeSwitchStyle(".inner-shape-small");
   if(motionDetectOn) {
+    $(".indicator").css({
+      "background-color": "#fca903",
+      "box-shadow": "",
+    })
     $("md-label-content").html("WAITING MOTION");
     fetch(motionOnUrl);
   }
   else{
+    $(".indicator").css({
+      "background-color": "#ff0000",
+      "box-shadow": "",
+    })
     $("md-label-content").html("DETECTOR OFF");
     fetch(motionOffUrl);
   }
@@ -176,13 +184,25 @@ function updateCondition(jsonfile) {
   //MOTION DETECTOR LOGIC
   if(jsonfile.motionstate){
     if (jsonfile.motiondetected) {
+      $(".indicator").css({
+        "background-color": "#98fb98",
+        "box-shadow": "0px 0px 5px 2px #ffffff",
+      })
       $(".md-label-content").html("MOTION DETECTED");
     }
     else {
-      $(".md-label-content").html("WAITING MOTION");
+      $(".indicator").css({
+        "background-color": "#fca903",
+        "box-shadow": "",
+      })
+      $(".md-label-content").html("WAITING MOTION"); 
     }
   }
   else {
+    $(".indicator").css({
+      "background-color": "#ff0000",
+      "box-shadow": "",
+    })
     $(".md-label-content").html("DETECTOR OFF");
   }
 }
