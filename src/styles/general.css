@@ -2,6 +2,12 @@ body {
   margin: 0;
   font-family: "Dosis", sans-serif;
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .wrapper {
@@ -39,7 +45,6 @@ body {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-  /* filter: brightness(60%); */
 }
 
 .cloud {
@@ -51,7 +56,6 @@ body {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-  /* filter: blur(5px); */
 }
 
 .device-field-wrapper {
@@ -165,3 +169,42 @@ body {
   border-radius: 25px;
   background-color: rgba(255, 255, 255, 0.2);
 }
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95px;
+  height: 30px;
+  border-radius: 6px;
+  border: 6px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.thebox {
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  border: 3px solid #999999;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: 0.5s;
+}
+
+.thebox:hover {
+  background-color: #98fb98;
+  border: 3px solid #ffffff;
+}
+
+#checkPass {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+

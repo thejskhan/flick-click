@@ -1,18 +1,38 @@
 let lightStateOn = true;
 let motionDetectOn = true;
 
-const ledOnUrl = "http://esp8266.local/?led=on";
 const ledOffUrl = "http://esp8266.local/?led=off";
+const motionOnUrl = "http://esp8266.local/?motion=on";
+const motionOffUrl = "http://esp8266.local/?motion=off";
 const url = "http://esp8266.local/?feedback";
 
-const ledState = [
-  {
-    ledState: "OFF",
-  },
-  {
-    ledState: "ON",
-  },
-];
+//CHANGE BRIGHTNESS
+//HANDLING BRIGHTNESS INPUT
+function brightnessRestrict(e) {
+  let charCode = (e.which) ? e.which : e.keyCode;
+  if (charCode > 31 && (charCode < 49 || charCode > 51)) {
+    return false;
+  } {
+    return true;
+  }
+}
+
+let brightness = 3;
+let ledOnUrl = "http://esp8266.local/?led=3";
+
+$("#brightness").on("input",() => {
+  if ($("#brightness").val() == ""){
+    return false;
+  }
+  else{
+    brightness = parseInt($("#brightness").val());
+  }
+  ledOnUrl = `http://esp8266.local/?led=${brightness}`;
+  if(lightStateOn) {
+    fetch(ledOnUrl)
+  }
+});
+
 const switchStyleBig = [
   {
     "justify-content": "flex-start",
@@ -44,13 +64,6 @@ const switchStyleSmall = [
     "background-blend-mode": "",
   },
 ];
-
-function post(url, json) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(json));
-}
 
 function changeSwitchStyle(classname) {
   let currentClass = undefined;
@@ -88,47 +101,95 @@ function httpGetJson(url) {
     })
     .then(function (responseAsJson) {
       updateCondition(responseAsJson);
-      console.log("Successful connection!");
     })
     .catch((error) => {
       isConnected = false;
       $(".wifi-status").html("DISCONNECTED");
-      $(".temprature-content").html("");
-      $(".humidity-content").html("");
+      $(".md-label-content").html("DISCONNECTED")
+      $("#brightness").attr("placeholder", `1-3`);
+      $(".state-content").text(`!`);
+      $(".temprature-content").html("°");
+      $(".humidity-content").html("%");
       console.error("Error:", error);
-      console.log("Unsuccessful connection!");
     });
 }
 
 function lightToggle() {
   changeSwitchStyle(".inner-shape-big");
   if (lightStateOn) {
+    $(".state-content").text(`${brightness}`);
     fetch(ledOnUrl);
   } else {
+    $(".state-content").text(`0`);
     fetch(ledOffUrl);
   }
 }
 
 function motionDetectToggle() {
   changeSwitchStyle(".inner-shape-small");
+  if(motionDetectOn) {
+    $("md-label-content").html("WAITING MOTION");
+    fetch(motionOnUrl);
+  }
+  else{
+    $("md-label-content").html("DETECTOR OFF");
+    fetch(motionOffUrl);
+  }
+
 }
 
 function updateCondition(jsonfile) {
-  let temp = "" + jsonfile.temprature + "°";
-  let humidity = "" + jsonfile.humidity + "%";
+  //WIFI CONNECTION STATUS UPDATE
   isConnected = jsonfile.connectionstatus;
-  if(jsonfile.ledstate != lightStateOn){
-    changeSwitchStyle(".inner-shape-big");
-  }
-  if(isConnected){
+  if (isConnected) {
     $(".wifi-status").html("CONNECTED");
   }
+
+  //TEMPRATURE AND HUMIDITY UPDATE
+  let temp = "" + jsonfile.temprature + "°";
+  let humidity = "" + jsonfile.humidity + "%";
   $(".temprature-content").html(temp);
   $(".humidity-content").html(humidity);
+
+  //LIGHT STATE ON OFF SYNC
+  let isOn = undefined;
+  if (jsonfile.ledstate != 0) {
+    isOn = true;
+    $("#brightness").attr("placeholder", `${jsonfile.ledstate}`);
+    $(".state-content").text(`${jsonfile.ledstate}`);
+  }
+  else {
+    $("#brightness").attr("placeholder", `0`);
+    $(".state-content").text(`0`);
+    isOn = false;
+  }
+
+  if(isOn != lightStateOn){
+    changeSwitchStyle(".inner-shape-big");
+  }
+
+  //MOTION DETECTOR ON OFF SYNC
+  if(jsonfile.motionstate != motionDetectOn){
+    changeSwitchStyle(".inner-shape-small");
+  }
+
+  //MOTION DETECTOR LOGIC
+  if(jsonfile.motionstate){
+    if (jsonfile.motiondetected) {
+      $(".md-label-content").html("MOTION DETECTED");
+    }
+    else {
+      $(".md-label-content").html("WAITING MOTION");
+    }
+  }
+  else {
+    $(".md-label-content").html("DETECTOR OFF");
+  }
 }
 
 $(document).ready(function () {
   fetch(ledOnUrl);
+  fetch(motionOnUrl);
 });
 
 let ssid;
@@ -173,12 +234,30 @@ function submitWifi() {
   fetch(customUrl);
 }
 
-function togglePass(){
+let passIsShown = false;
+function togglePass(isShown){
   let input = document.getElementById("password");
-  if (input.type === "password") {
-    input.type = "text";
-  } else {
+  if(isShown){
+    passIsShown = false;
     input.type = "password";
+    $(".thebox").css({
+      "background-color": "",
+      "border": "",
+      "-webkit-transform": "",
+      "-ms-transform": "",
+      "transform": "",
+    })
+  }
+  else{
+    $(".thebox").css({
+      "background-color": "#98fb98",
+      "border": "3px solid #ffffff",
+      "-webkit-transform": "rotate(315deg)",
+      "-ms-transform": "rotate(315deg)",
+      "transform": "rotate(315deg)",
+    })
+    passIsShown = true;
+    input.type = "text";
   }
 }
 

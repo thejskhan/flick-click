@@ -18,7 +18,7 @@ let conditionOn = undefined;
 
 let numEntered = 0;
 function inputRestrict(e) {
-  var charCode = (e.which) ? e.which : e.keyCode;
+  let charCode = (e.which) ? e.which : e.keyCode;
   if (charCode > 31 && (charCode < 48 || charCode > 57)) {
     return false;
   } {
@@ -27,7 +27,7 @@ function inputRestrict(e) {
 
 }
 
-$("#hour").change(() => {
+$("#hour").on("change", () => {
   if ($("#hour").val() >= 24) {
     hourInput = 23;
     $("#hour").val("23");
@@ -36,7 +36,7 @@ $("#hour").change(() => {
   }
 });
 
-$("#minute").change(() => {
+$("#minute").on("change", () => {
   if ($("#minute").val() >= 60) {
     minInput = 59;
     $("#minute").val("59");
@@ -45,12 +45,18 @@ $("#minute").change(() => {
   }
 });
 
-$("#second").change(() => {
+$("#second").on("change", () => {
   if ($("#second").val() >= 60) {
     secInput = 59;
     $("#second").val("59");
   } else {
-    secInput = parseInt($("#second").val());
+    if (($("#second").val() <= 1) && ($("#minute").val() == "") && ($("#hour").val() == "")){
+      $("#second").val("2")
+      secInput = 2;
+    }
+    else {
+      secInput = parseInt($("#second").val());
+    }
   }
 });
 
@@ -197,10 +203,14 @@ function toggleTimer() {
       if (netSec == 1) {
         setTimeout(() => {
           if (conditionOn) {
+            $("#brightness").attr("placeholder", `${brightness}`);
+            $(".state-content").text(`${brightness}`);
             $(".inner-shape-big").css(switchStyleBig[1])
             fetch(ledOnUrl);
           }
           else {
+            $("#brightness").attr("placeholder", `0`);
+            $(".state-content").text(`0`);
             $(".inner-shape-big").css(switchStyleBig[0])
             fetch(ledOffUrl);
           }

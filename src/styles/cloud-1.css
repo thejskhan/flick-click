@@ -69,8 +69,32 @@
 }
 /*  */
 
-.spacer {
+.lightsettings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1;
+}
+
+.lightsettings-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #999999;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  height: 65px;
+}
+
+.lightsettings-wrapper > input {
+  text-align: center;
+  background: none;
+  border-radius: 10px;
+  height: 60px;
+  border:none;
+  max-width: 120px;
+  color: #ffffff;
+  font-size: 25px;
 }
 
 /*  */

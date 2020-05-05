@@ -65,11 +65,21 @@
 }
 
 .circle-big {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   height: 80px;
   width: 80px;
   margin-left: 6px;
   margin-right: 6px;
   background-color: #ffffff;
+}
+
+.state-content {
+  color: #000000;
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  font-size: 40px;
 }
 /*  */
